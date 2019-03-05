@@ -1,7 +1,6 @@
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -17,11 +16,14 @@
 
         function desenhaLinha(linha) {
             var row = $("<tr />")
-            $("#tabela").append(row); 
+            $("#tabela").append(row);
             row.append($("<td>" + linha._id + "</td>"));
             row.append($("<td>" + linha._score + "</td>"));
-            row.append($("<td>" + linha._source.titulo + "</td>"));
-            row.append($("<td>" + linha._source.corpo + "</td>"));
+            row.append($("<td>" + linha._source.dcDate + "</td>"));
+            row.append($("<td>" + linha._source.dcLanguage + "</td>"));
+            row.append($("<td>" + linha._source.dcCreator + "</td>"));
+            row.append($("<td>" + linha._source.dcTitle + "</td>"));
+            row.append($("<td>" + linha._source.dcDescription + "</td>"));
         }
 
         function desenhaTabela(data) {
@@ -36,10 +38,10 @@
                 let endereco = "http://localhost:5000/pesquisa/" + termo;
                 $.get(endereco, function (data) {
                 }).done(function (data) {
-                    $("#p1").text(data);
-                    
+                    $("#p1").text(data); //TESTE - tirar em producao
+
                     let obj = jQuery.parseJSON(data);
-                    console.log(obj[0]._source.titulo);
+                    // console.log(obj[0]._source.titulo);
                     desenhaTabela(obj);
                 })
             })
@@ -70,22 +72,27 @@
         </div>
     </nav>
     <div class="container">
-        <h1>My First Bootstrap Page</h1>
-        <p>This is some text.</p>
+        <h1>Recuperação expandida</h1>
     </div>
     <div class="container" id="resp">
-        Aqui deve ficar o resultset <br>
+        
         <p id="p1"> </p>
-        <table id="tabela">
-            <tr>
-                <th>Id</th>
-                <th>Ranking</th>
-                <th>Titulo</th>
-                <th>Corpo</th>
-            </tr>
+        <table id="tabela" class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Id</th>
+                    <th>Ranking</th>
+                    <th>Data</th>
+                    <th>Idioma</th>
+                    <th>Autor</th>
+                    <th>Título</th>
+                    <th>Texto</th>
+                    <th></th>
+                </tr>
+            </thead>
         </table>
         <br>
-        <div id="p2"> </div>
+        
     </div>
 
 </body>

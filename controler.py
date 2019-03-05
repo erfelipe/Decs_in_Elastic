@@ -1,11 +1,12 @@
+
 from elasticsearch import Elasticsearch
 
 def getDados(t):
     es = Elasticsearch()
-    res = es.search(index="teste", body={
+    res = es.search(index="acervo", body={
         "query": {
             "match": {
-                "corpo": t
+                "dcDescription": t
             }
         }
     })
