@@ -1,18 +1,48 @@
 
 from elasticsearch import Elasticsearch
 
-def getDados(t):
+
+def getDadosPeloDeCS(tBr, tEs, tEn):
     es = Elasticsearch()
-    res = es.search(index="acervo", body={
+    res = es.search(index="acervo", body = {
         "query": {
-            "match": {
-                "dcDescription": t
+            "bool": {
+                "should": [
+                    {
+                        "match": {
+                            "dcDescription": tBr
+                        }
+                    },
+                    {
+                        "match": {
+                            "dcDescription": tEs
+                        }
+                    },
+                    {
+                        "match": {
+                            "dcDescription": tEn
+                        }
+                    }
+                ]
             }
         }
     })
     print(res['hits']['hits'])
     return res['hits']['hits']
 
+
+def getDados(tBr, tEs, tEn):
+    es = Elasticsearch()
+    res = es.search(index="acervo", body={
+        "query": {
+            "match": {
+                "dcDescription": tBr
+            }
+        }
+    })
+    print(res['hits']['hits'])
+    return res['hits']['hits']
+
+
 def dataAlreadyExists(hs):
     return True
-

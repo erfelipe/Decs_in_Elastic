@@ -19,7 +19,12 @@ def semPesquisa():
 
 @app.route("/pesquisa/<termo>/") 
 def pesquisa(termo):  
-    res = controler.getDados(t=termo) 
+    #encontra o termo em Es panhol
+    termoEsp = "ofrecer"
+    #encontra o termo em En glish
+    termoEng = "meaning"
+    
+    res = controler.getDadosPeloDeCS(tBr=termo, tEs=termoEsp, tEn=termoEng) 
     return json.dumps(res)
 
 if __name__ == "__main__":
