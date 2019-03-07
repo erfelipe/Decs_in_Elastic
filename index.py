@@ -19,13 +19,16 @@ def semPesquisa():
 
 @app.route("/pesquisa/<termo>/") 
 def pesquisa(termo):  
+    termos = controler.get_Termos_Outros_Idiomas(termo)
+    #print(termos)
     #encontra o termo em Es panhol
-    termoEsp = "ofrecer"
+    termoEsp = termos['es']
     #encontra o termo em En glish
-    termoEng = "meaning"
+    termoEng = termos['en']
     
-    res = controler.getDadosPeloDeCS(tBr=termo, tEs=termoEsp, tEn=termoEng) 
+    res = controler.get_DadosPeloDeCS(tBr=termo, tEs=termoEsp, tEn=termoEng) 
     return json.dumps(res)
+
 
 if __name__ == "__main__":
     app.run(debug=True) 
