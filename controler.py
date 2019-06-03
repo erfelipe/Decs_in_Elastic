@@ -28,7 +28,7 @@ def get_DadosPeloDeCS(tBr, tEs, tEn):
             }
         }
     })
-    print(res['hits']['hits']) #tirar em producao - apenas teste
+    #print(res['hits']['hits']) #tirar em producao - apenas teste
     return res['hits']['hits']
 
 # Metodo a ser retirado
@@ -41,7 +41,7 @@ def get_Dados_somente_Br(tBr):
             }
         }
     })
-    print(res['hits']['hits'])
+    #print(res['hits']['hits'])
     return res['hits']['hits']
 
 # Verificar se o MD5 do arquivo jah estah na base
@@ -92,6 +92,5 @@ def get_Termos_Outros_Idiomas(termoBr):
             if (tlinha == termoBr.lower()) :
                 dados['es'] = linha['es']
                 dados['en'] = linha['en']
-    
     return dados
 

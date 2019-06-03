@@ -18,6 +18,10 @@
     <script type="text/javascript">
 
         function desenhaGrafo(data, termoPesquisado) {
+
+            //Springy.Renderer()
+            $('#grafo').empty();
+
             //estrutura para filtrar os dados e preparar o json para o grafo
             var mainDict = [];
             //estrutura para considerar os nodos do grafo
@@ -33,8 +37,8 @@
             nodos.push('pt-br');
             nodos.push('en');
             nodos.push('es');
-            console.log(mainDict);
-            console.log(nodos);
+            //console.log(mainDict);
+            //nsole.log(nodos);
 
             //estrutura para considerar as conexoes
             var conexoes = [];
@@ -61,22 +65,6 @@
             var graph = new Springy.Graph();
             graph.loadJSON(graphJSON);
             //http://getspringy.com/demo-json.html
-
-
-            /*             var graph = new Springy.Graph();
-                        // make some nodes
-                        var node1 = graph.newNode({ label: 'Norway Spruce' });
-                        var node2 = graph.newNode({ label: 'Sicilian Fir' });
-                        var node3 = graph.newNode({ label: 'Sumatran Pine' });
-                        var node4 = graph.newNode({ label: 'Japanese Larch' });
-                        var node5 = graph.newNode({ label: 'Giant Sequoia' });
-            
-                        // connect them with an edge
-                        graph.newEdge(node1, node2);
-                        graph.newEdge(node2, node3);
-                        graph.newEdge(node2, node4);
-                        graph.newEdge(node1, node4);
-                        graph.newEdge(node1, node5); */
 
             var layout = new Springy.Layout.ForceDirected(
                 graph,
@@ -122,16 +110,16 @@
                     ctx.restore();
                 }
             );
+            
+            //$('#grafo').springy({ graph: graph });
 
-            $('#grafo').springy({ graph: graph });
-
-            // renderer.start();
+            renderer.start();
 
         }
 
         function desenhaLinha(linha) {
             var row = $("<tr />")
-            $("#tabela").append(row);
+            $("#corpoTabela").append(row);
             row.append($("<td>" + linha._id + "</td>"));
             row.append($("<td>" + linha._score + "</td>"));
             row.append($("<td>" + linha._source.dcDate + "</td>"));
@@ -142,6 +130,7 @@
         }
 
         function desenhaTabela(data) {
+            $("#corpoTabela").empty();
             for (var i = 0; i < data.length; i++) {
                 desenhaLinha(data[i]);
             }
@@ -205,6 +194,9 @@
                     <th></th>
                 </tr>
             </thead>
+            <tbody id="corpoTabela">
+
+            </tbody>
         </table>
         <br>
     </div class="container" id="graf">

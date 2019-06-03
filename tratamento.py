@@ -19,7 +19,7 @@ def calc_hash(f):
     print(hasher.hexdigest())
     return hasher.hexdigest()
 
-
+# Extrai o texto do PDF
 def extraiPDF(f):
     raw = parser.from_file(f)
     raw = str(raw)
